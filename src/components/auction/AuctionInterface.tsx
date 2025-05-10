@@ -6,7 +6,7 @@ import Timer from "./Timer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const AuctionInterface = () => {
   const { auctionState, startAuction, pauseAuction, resumeAuction, nextPlayer, endAuction, placeBid } = useAuction();

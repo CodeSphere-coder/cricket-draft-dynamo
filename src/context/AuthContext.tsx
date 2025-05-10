@@ -21,6 +21,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string, role: UserRole, teamName?: string) => Promise<void>;
   logout: () => void;
+  updateUserBudget: (newBudget: number) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -110,13 +111,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  // Update user budget function
+  const updateUserBudget = (newBudget: number) => {
+    if (user && user.role === 'team-owner') {
+      setUser({
+        ...user,
+        budget: newBudget
+      });
+    }
+  };
+
   const value = {
     user,
     isAuthenticated: !!user,
     isLoading,
     login,
     register,
-    logout
+    logout,
+    updateUserBudget
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

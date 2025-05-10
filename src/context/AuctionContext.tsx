@@ -1,6 +1,5 @@
-
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { useAuth } from './AuthContext';
 
 // Player type
@@ -159,7 +158,7 @@ export function AuctionProvider({ children }: { children: ReactNode }) {
   const [filteredPlayers, setFilteredPlayers] = useState<Player[]>(initialPlayers);
   const [auctionState, setAuctionState] = useState<AuctionState>(initialAuctionState);
   const { toast } = useToast();
-  const { user } = useAuth();
+  const { user, updateUserBudget } = useAuth();
   
   // Timer interval reference
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
@@ -204,6 +203,11 @@ export function AuctionProvider({ children }: { children: ReactNode }) {
               title: "Player Sold!",
               description: `${prevState.currentPlayer?.name} sold to ${prevState.currentBidder} for ₹${(prevState.currentBid / 100000).toFixed(1)}L`,
             });
+            
+            // Deduct the amount from the team's budget
+            if (user && user.teamName === prevState.currentBidder) {
+              updateUserBudget(user.budget! - prevState.currentBid);
+            }
             
             return {
               ...prevState,
@@ -276,6 +280,11 @@ export function AuctionProvider({ children }: { children: ReactNode }) {
               title: "Player Sold!",
               description: `${prevState.currentPlayer?.name} sold to ${prevState.currentBidder} for ₹${(prevState.currentBid / 100000).toFixed(1)}L`,
             });
+            
+            // Deduct the amount from the team's budget
+            if (user && user.teamName === prevState.currentBidder) {
+              updateUserBudget(user.budget! - prevState.currentBid);
+            }
             
             return {
               ...prevState,
@@ -384,6 +393,11 @@ export function AuctionProvider({ children }: { children: ReactNode }) {
               description: `${prevState.currentPlayer?.name} sold to ${prevState.currentBidder} for ₹${(prevState.currentBid / 100000).toFixed(1)}L`,
             });
             
+            // Deduct the amount from the team's budget
+            if (user && user.teamName === prevState.currentBidder) {
+              updateUserBudget(user.budget! - prevState.currentBid);
+            }
+            
             return {
               ...prevState,
               status: 'paused',
@@ -415,7 +429,7 @@ export function AuctionProvider({ children }: { children: ReactNode }) {
     }, 1000);
     
     setTimerInterval(interval);
-  }, [players, auctionState, endAuction, timerInterval, toast]);
+  }, [players, auctionState, endAuction, timerInterval, toast, user, updateUserBudget]);
   
   const placeBid = useCallback((amount: number) => {
     if (!user || user.role !== 'team-owner' || !user.budget) {
