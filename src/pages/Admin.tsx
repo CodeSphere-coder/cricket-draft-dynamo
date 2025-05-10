@@ -1,9 +1,9 @@
 
-import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import AdminPanel from "@/components/admin/AdminPanel";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Admin = () => {
   const { user, isAuthenticated } = useAuth();
