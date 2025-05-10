@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useAuction } from "@/context/AuctionContext";
 import { useAuth } from "@/context/AuthContext";
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const AuctionInterface = () => {
   const { auctionState, startAuction, pauseAuction, resumeAuction, nextPlayer, endAuction, placeBid } = useAuction();
@@ -133,13 +133,14 @@ const AuctionInterface = () => {
             <Card className="col-span-1 lg:col-span-2">
               <CardContent className="pt-6">
                 <div className="flex flex-col md:flex-row gap-6">
-                  <div className="w-28 h-28 rounded-full overflow-hidden mx-auto md:mx-0">
-                    <img 
+                  <Avatar className="w-28 h-28 rounded-full mx-auto md:mx-0">
+                    <AvatarImage 
                       src={auctionState.currentPlayer.image || "/placeholder.svg"} 
                       alt={auctionState.currentPlayer.name} 
-                      className="w-full h-full object-cover"
+                      className="object-cover object-center"
                     />
-                  </div>
+                    <AvatarFallback>{auctionState.currentPlayer.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
                   
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-2">

@@ -67,7 +67,7 @@ const initialPlayers: Player[] = [
       wickets: 4,
       economy: 6.2,
     },
-    image: '/placeholder.svg',
+    image: '/lovable-uploads/c3ce43e5-c117-4243-a8e7-ba3202987f7e.png',
   },
   {
     id: '2',

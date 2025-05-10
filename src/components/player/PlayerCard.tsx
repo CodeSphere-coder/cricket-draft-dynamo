@@ -1,6 +1,6 @@
-
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface PlayerCardProps {
   id: string;
@@ -46,9 +46,14 @@ const PlayerCard = ({
   return (
     <Card className="player-card h-full flex flex-col justify-between">
       <CardHeader className="pb-2 pt-4 text-center">
-        <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-3">
-          <img src={baseImage} alt={name} className="w-full h-full object-cover" />
-        </div>
+        <Avatar className="w-20 h-20 mx-auto mb-3">
+          <AvatarImage 
+            src={baseImage} 
+            alt={name} 
+            className="object-cover object-center"
+          />
+          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+        </Avatar>
         <h3 className="text-lg font-semibold">{name}</h3>
         <div className="flex items-center justify-center space-x-2">
           <Badge variant="outline">{country}</Badge>
@@ -62,7 +67,7 @@ const PlayerCard = ({
           <div className="font-semibold text-lg text-cricket-orange">{formatPrice(basePrice)}</div>
         </div>
         
-        <div className="stats-grid">
+        <div className="grid grid-cols-2 gap-2">
           <div className="p-1 bg-gray-50 rounded">
             <span className="block text-xs text-gray-500">Matches</span>
             <span className="font-medium">{stats.matches}</span>
