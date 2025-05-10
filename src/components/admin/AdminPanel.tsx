@@ -78,13 +78,15 @@ const AdminPanel = () => {
     
     if (name.includes(".")) {
       const [parent, child] = name.split(".");
-      setNewPlayer({
-        ...newPlayer,
-        [parent]: {
-          ...newPlayer[parent as keyof typeof newPlayer],
-          [child]: parseFloat(value) || 0
-        }
-      });
+      if (parent === "stats") {
+        setNewPlayer({
+          ...newPlayer,
+          stats: {
+            ...newPlayer.stats,
+            [child]: parseFloat(value) || 0
+          }
+        });
+      }
     } else {
       setNewPlayer({
         ...newPlayer,
@@ -386,3 +388,4 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+
