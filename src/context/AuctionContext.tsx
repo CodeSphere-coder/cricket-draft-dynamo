@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from './AuthContext';
@@ -84,7 +85,7 @@ const initialPlayers: Player[] = [
       runs: 342,
       strikeRate: 84.3,
     },
-    image: '/placeholder.svg',
+    image: '/lovable-uploads/2d57c738-8f78-4959-8dae-1e1911ae7bdb.png',
   },
   {
     id: '3',
@@ -103,7 +104,7 @@ const initialPlayers: Player[] = [
       highestScore: 102,
       bestBowling: '5/61',
     },
-    image: '/placeholder.svg',
+    image: '/lovable-uploads/66b71d60-a018-4d24-965c-ff24ecca02f7.png',
   },
   {
     id: '4',
@@ -120,7 +121,7 @@ const initialPlayers: Player[] = [
       wickets: 3,
       economy: 5.8,
     },
-    image: '/placeholder.svg',
+    image: '/lovable-uploads/69ed4474-0378-4a15-baa2-6258f7edb6f1.png',
   },
   {
     id: '5',
@@ -137,7 +138,7 @@ const initialPlayers: Player[] = [
       runs: 874,
       strikeRate: 103.2,
     },
-    image: '/placeholder.svg',
+    image: '/lovable-uploads/5ea65d44-9ed3-4ee9-a685-d7c2367dd121.png',
   }
 ];
 
